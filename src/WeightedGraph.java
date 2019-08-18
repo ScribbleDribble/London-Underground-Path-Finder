@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 public class WeightedGraph {
 
-
     public static class Edge {
         public int u, v, weight;
 
@@ -15,11 +14,10 @@ public class WeightedGraph {
 
     }
 
+    public abstract static class Graph {
 
-    public static class Graph {
-
-        private ArrayList<Edge>[] adjListArr;
-        private int n_vertices;
+        protected ArrayList<Edge>[] adjListArr;
+        protected int n_vertices;
 
 
         public Graph(int n_vertices) {
@@ -29,8 +27,8 @@ public class WeightedGraph {
 
             for (int i = 0; i < n_vertices; i++) {
                 adjListArr[i] = new ArrayList<>();
-            }
 
+            }
         }
 
         public void addEdge(int u, int v, int w) {
@@ -38,6 +36,7 @@ public class WeightedGraph {
             Edge ePrime = new Edge(v, u, w);
             adjListArr[u].add(e);
             adjListArr[v].add(ePrime);
+            System.out.println(v);
         }
 
         public void printGraph() {
