@@ -1,3 +1,4 @@
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,6 +12,8 @@ public class DijkstraPath {
     private HashSet<Integer> visited = new HashSet<>();
 
     private WeightedGraph.Graph G;
+
+    //private ArrayList<WeightedGraph.Edge>[] adj = G.getAdjListArr();
 
     public DijkstraPath(int n_vertices, WeightedGraph.Graph G) {
 
@@ -64,7 +67,7 @@ public class DijkstraPath {
 
 
 
-    public double shortestPath(int u, int v) {
+    public double shortestDist(int u, int v) {
 
         ArrayList<WeightedGraph.Edge>[] adj = G.getAdjListArr();
 
@@ -106,6 +109,50 @@ public class DijkstraPath {
 
     }
 
+    public int[] shortestPath(int u, int v) {
+
+        ArrayList<WeightedGraph.Edge>[] adj = G.getAdjListArr();
+
+        ArrayDeque<Integer> stack = new ArrayDeque<>();
+
+        stack.push(v);
+
+        double smallest_dist = Double.POSITIVE_INFINITY;
+        int path_vertex = -99;
+
+        while (v != u)
+        {
+
+
+            for (int i = 0; i < adj[v].size(); i++)
+            {
+                int adjacent_vertex = adj[v].get(i).v;
+
+
+
+                if( dist.get(adjacent_vertex) < smallest_dist )
+                {
+                    path_vertex = adjacent_vertex;
+                    smallest_dist = dist.get(adjacent_vertex);
+                }
+
+            }
+
+            stack.push(path_vertex);
+            v = path_vertex;
+
+        }
+
+        int[] stations = new int[stack.size()];
+
+        for (int i = 0; !stack.isEmpty(); i++)
+        {
+            stations[i] = stack.pop();
+        }
+
+        return stations;
+
+    }
 
 
 }

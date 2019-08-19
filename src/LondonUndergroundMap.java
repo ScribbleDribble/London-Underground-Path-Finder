@@ -89,7 +89,8 @@ class Test {
         LondonUndergroundMap ld = new LondonUndergroundMap();
 
         DijkstraPath path = new DijkstraPath(305, ld);
-        System.out.println(path.shortestPath(145, 164));
+        System.out.println(path.shortestDist(192, 7));
+        System.out.println(path.shortestPath(192, 7));
     }
 
 }
