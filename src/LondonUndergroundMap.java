@@ -135,8 +135,8 @@ class Test {
         //System.out.println(path.shortestDist(16, 212));
         //ld.printJourney(path.shortestPath(16, 212));
 
-        System.out.println(path.shortestDist(89, 15));
-        ld.printJourney(path.shortestPath(89, 15));
+        System.out.println(path.shortestDist(212, 164));
+        ld.printJourney(path.shortestPath(212, 164));
 
     }
 
