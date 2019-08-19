@@ -7,10 +7,11 @@ public class LondonUndergroundMap extends WeightedGraph.Graph {
 
     // correspond vertex number with station name
     private HashMap<Integer, String> station = new HashMap<>();
+    // each edge will share a line
     private HashMap<Set<Integer>, Integer> train_line = new HashMap<>();
+    // each line will have a name that can be retrieved
+    private HashMap<Integer, String> name_of_line = new HashMap<>();
 
-    // there isn't 350 stations (actually 302) but the data on vertex id numbers are not 1:1 with the station number
-    // so to fit in all the other vertex ids >
     private static final int V = 305;
 
     public LondonUndergroundMap() throws IOException {
@@ -39,10 +40,10 @@ public class LondonUndergroundMap extends WeightedGraph.Graph {
         bufferedReader.close();
 
         BufferedReader in = new BufferedReader(
-                new FileReader("data/london_connections.csv"));
+                                new FileReader("data/london_connections.csv"));
+
 
         String line = in.readLine();
-
 
         for (line = in.readLine(); line != null; line = in.readLine())
         {
@@ -58,6 +59,21 @@ public class LondonUndergroundMap extends WeightedGraph.Graph {
         }
 
         in.close();
+
+        BufferedReader in2 = new BufferedReader(
+                                new FileReader("data/london_lines.csv"));
+
+        String[] strings;
+
+        line = in2.readLine();
+
+        for (line = in2.readLine(); line != null; line = in2.readLine())
+        {
+            strings = line.split(",");
+            name_of_line.put(Integer.parseInt(strings[0]), strings[1]);
+
+        }
+
     }
 
 
@@ -65,10 +81,37 @@ public class LondonUndergroundMap extends WeightedGraph.Graph {
         return station.get(vertex);
     }
 
-    // bethenal green to liv  u = 24 -> v = 156
-//    public int findPath(int u, int v) {
-//
-//    }
+    //public String getLine(int line) { }
+
+    public void printJourney(int[] stations) {
+
+        int previous_station = -1;
+        int previous_line = -1;
+
+        HashSet<Integer> set = new HashSet<>();
+
+        for (int i = 0; i < stations.length; i++)
+        {
+            set.add(previous_station);
+            set.add(stations[i]);
+
+            if (train_line.get(set) != null && previous_line != train_line.get(set))
+            {
+                System.out.println("\n"+"-----"+name_of_line.get(train_line.get(set))+"-----"+"\n");
+                previous_line = train_line.get(set);
+            }
+
+            else {
+                System.out.println();
+            }
+
+            previous_station = stations[i];
+            set.clear();
+            System.out.println(getStation(stations[i]));
+        }
+
+
+    }
 
     @Override
     public void printGraph() {
@@ -89,8 +132,12 @@ class Test {
         LondonUndergroundMap ld = new LondonUndergroundMap();
 
         DijkstraPath path = new DijkstraPath(305, ld);
-        System.out.println(path.shortestDist(192, 7));
-        System.out.println(path.shortestPath(192, 7));
+        //System.out.println(path.shortestDist(16, 212));
+        //ld.printJourney(path.shortestPath(16, 212));
+
+        System.out.println(path.shortestDist(89, 15));
+        ld.printJourney(path.shortestPath(89, 15));
+
     }
 
 }
