@@ -36,7 +36,7 @@ public class WeightedGraph {
             Edge ePrime = new Edge(v, u, w);
             adjListArr[u].add(e);
             adjListArr[v].add(ePrime);
-            System.out.println(v);
+
         }
 
         public void printGraph() {

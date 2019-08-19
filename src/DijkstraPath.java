@@ -44,7 +44,19 @@ public class DijkstraPath {
 
         if (closest_vertex == -1)
         {
-            return src;
+            for (int vertex : visited)
+            {
+                for (int i = 0; i < adj[vertex].size(); i++)
+                {
+                    int adjacent_vertex = adj[vertex].get(i).v;
+                    if (!visited.contains(adjacent_vertex))
+                    {
+                        return adjacent_vertex;
+                    }
+                }
+            }
+
+            //return src;
         }
 
         return closest_vertex;
@@ -62,7 +74,7 @@ public class DijkstraPath {
         dist.put(u, 0.0);
         visited.add(u);
 
-        while ( !(visited.size() == n_vertices) || v == u)
+        while ( !(visited.size() == 302) )
         {
 
             for (int i = 0; i < adj[u].size(); i++)
@@ -70,7 +82,7 @@ public class DijkstraPath {
                 w = adj[u].get(i).weight;
                 u2 = adj[u].get(i).v;
                 tempDist = (double) w + dist.get(u2);
-
+                visited.add(u);
 
                 if (tempDist < dist.get(u))
                 {
@@ -81,12 +93,14 @@ public class DijkstraPath {
             }
 
             u = findClosestVertex(u, src);
-            visited.add(u);
+            //System.out.println(u);
+
 
             if (visited.size() == n_vertices)
                 return dist.get(v);
 
         }
+
 
         return dist.get(v);
 
