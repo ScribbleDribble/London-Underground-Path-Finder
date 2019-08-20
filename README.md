@@ -1,6 +1,6 @@
 # London Underground Path Finder
 
-![](images/tube-map.gif)
+![](images/underground.png)
 
 This program outputs the shortest path between two stations and the appropriate train line(s),
 using Dijkstra's algorithm.

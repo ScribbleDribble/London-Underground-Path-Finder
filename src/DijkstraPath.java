@@ -84,17 +84,16 @@ public class DijkstraPath {
             {
                 w = adj[u].get(i).weight;
                 u2 = adj[u].get(i).v;
-                tempDist = (double) w + dist.get(u2);
-                visited.add(u);
+                tempDist = (double) w + dist.get(u);
 
-                if (tempDist < dist.get(u))
+                if (tempDist < dist.get(u2))
                 {
                     // update shortest distance to get to current vertex
-                    dist.put(u, tempDist);
+                    dist.put(u2, tempDist);
                 }
 
             }
-
+            visited.add(u);
             u = findClosestVertex(u, src);
             //System.out.println(u);
 

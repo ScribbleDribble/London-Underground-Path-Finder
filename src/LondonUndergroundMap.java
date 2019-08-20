@@ -7,6 +7,7 @@ public class LondonUndergroundMap extends WeightedGraph.Graph {
 
     // correspond vertex number with station name
     private HashMap<Integer, String> station = new HashMap<>();
+
     // each edge will share a line
     private HashMap<Set<Integer>, Integer> train_line = new HashMap<>();
     // each line will have a name that can be retrieved
@@ -113,14 +114,44 @@ public class LondonUndergroundMap extends WeightedGraph.Graph {
 
     }
 
-    @Override
-    public void printGraph() {
+    public void setStations(String src, String dest, DijkstraPath path) {
+        src = src.toLowerCase();
+        dest = dest.toLowerCase();
 
-        for (int i = 0; i < n_vertices; i++) {
-            for (int j = 0; j < adjListArr[i].size(); j++) {
-                System.out.println(i + " -> " + adjListArr[i].get(j).v +" w " + adjListArr[i].get(j).weight);
+        int length = 0;
+
+        int u = -1, v = -1;
+
+        for (int vertex: station.keySet())
+        {
+            length = station.get(vertex).length();
+
+            String s = station.get(vertex).toLowerCase().substring(1, length - 1);
+
+            // string of station name with outer speech marks removed
+            if (s.equals(src))
+            {
+                u = vertex;
             }
+
+            else if (s.equals(dest))
+            {
+                v = vertex;
+            }
+
         }
+
+        if (u != -1 && v != -1)
+        {
+            System.out.println(path.shortestDist(u, v));
+            printJourney(path.shortestPath(u, v));
+        }
+
+        else
+        {
+            System.out.println("Couldn't find a station");
+        }
+
     }
 
 }
@@ -135,9 +166,15 @@ class Test {
         //System.out.println(path.shortestDist(16, 212));
         //ld.printJourney(path.shortestPath(16, 212));
 
-        System.out.println(path.shortestDist(212, 164));
-        ld.printJourney(path.shortestPath(212, 164));
+        //System.out.println(path.shortestDist(164, 212));
+        //System.out.println(path.shortestDist(236, 104));
+        //ld.printJourney(path.shortestPath(164, 212));
+
+        ld.setStations("Mile End", "Paddington", path);
 
     }
 
 }
+
+// + 2 2 1 4
+// 167 14
