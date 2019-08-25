@@ -26,8 +26,11 @@ public class LondonUndergroundMap extends WeightedGraph.Graph {
 
     public void readStationConnections() throws IOException {
 
+        File f = new File("../data/london_stations.csv");
+
         BufferedReader bufferedReader = new BufferedReader(
-                                            new FileReader("data/london_stations.csv"));
+                                            new FileReader("../data/london_stations.csv"));
+                                            //new FileReader("data/london_stations.csv"));
 
         // skip over field names
         String l = bufferedReader.readLine();
@@ -41,7 +44,7 @@ public class LondonUndergroundMap extends WeightedGraph.Graph {
         bufferedReader.close();
 
         BufferedReader in = new BufferedReader(
-                                new FileReader("data/london_connections.csv"));
+                                new FileReader("../data/london_connections.csv"));
 
 
         String line = in.readLine();
@@ -62,7 +65,7 @@ public class LondonUndergroundMap extends WeightedGraph.Graph {
         in.close();
 
         BufferedReader in2 = new BufferedReader(
-                                new FileReader("data/london_lines.csv"));
+                                new FileReader("../data/london_lines.csv"));
 
         String[] strings;
 
@@ -143,7 +146,7 @@ public class LondonUndergroundMap extends WeightedGraph.Graph {
 
         if (u != -1 && v != -1)
         {
-            System.out.println(path.shortestDist(u, v));
+            path.shortestDist(u, v);
             printJourney(path.shortestPath(u, v));
         }
 
@@ -156,7 +159,7 @@ public class LondonUndergroundMap extends WeightedGraph.Graph {
 
 }
 
-
+/*
 class Test {
 
     public static void main(String[] args) throws IOException{
@@ -178,3 +181,4 @@ class Test {
 
 // + 2 2 1 4
 // 167 14
+*/
