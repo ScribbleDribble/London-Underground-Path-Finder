@@ -30,7 +30,7 @@ public class LondonUndergroundMap extends WeightedGraph.Graph {
 
         BufferedReader bufferedReader = new BufferedReader(
                                             new FileReader("../data/london_stations.csv"));
-                                            //new FileReader("data/london_stations.csv"));
+
 
         // skip over field names
         String l = bufferedReader.readLine();
@@ -158,27 +158,3 @@ public class LondonUndergroundMap extends WeightedGraph.Graph {
     }
 
 }
-
-/*
-class Test {
-
-    public static void main(String[] args) throws IOException{
-        LondonUndergroundMap ld = new LondonUndergroundMap();
-
-        DijkstraPath path = new DijkstraPath(305, ld);
-        //System.out.println(path.shortestDist(16, 212));
-        //ld.printJourney(path.shortestPath(16, 212));
-
-        //System.out.println(path.shortestDist(164, 212));
-        //System.out.println(path.shortestDist(236, 104));
-        //ld.printJourney(path.shortestPath(164, 212));
-
-        ld.setStations("Mile End", "Paddington", path);
-
-    }
-
-}
-
-// + 2 2 1 4
-// 167 14
-*/

@@ -17,7 +17,7 @@ public class Main {
                 LondonUndergroundMap ld = new LondonUndergroundMap();
                 DijkstraPath dijkstraPath = new DijkstraPath(V, ld);
 
-                System.out.println(args[0] + args[1]);
+                System.out.println(args[0] + " --> " +args[1]);
 
                 ld.setStations(args[0], args[1], dijkstraPath);
             }
